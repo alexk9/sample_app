@@ -65,6 +65,8 @@ module SampleApp
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     
+    #timestamp로 migrate파일의 prefix를 생성하지 않고, sequential 한 숫자로 생성하도록 한다.
     config.active_record.timestamped_migrations = false
+   
   end
 end
