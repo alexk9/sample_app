@@ -8,11 +8,14 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# 참고 : http://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html#method-i-has_many
 
 class User < ActiveRecord::Base
   attr_accessible :email, :name, :password, :password_confirmation
   has_secure_password
+  #dependent 옵션은 User가 삭제될때, Micropost도 삭제하도록 하는 옵션 
   has_many :microposts, dependent: :destroy
+  #relationship과 1:n의 관계에서 나를 가리키게 할 key를 정할때, foreign_key를 쓴다.
   has_many :relationships, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :relationships, source: :followed
   has_many :reverse_relationships, foreign_key: "followed_id",
